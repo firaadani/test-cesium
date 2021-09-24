@@ -1,7 +1,5 @@
 import React from "react";
 
-import signalIcon from "./signal-tower.svg";
-
 import Resium from "./Resium";
 
 function App() {

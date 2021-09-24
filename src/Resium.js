@@ -99,7 +99,7 @@ const Resium = () => {
             return (
               <Entity
                 name={`BTS ${id}`}
-                position={Cartesian3.fromDegrees(e.lat, e.long, 100)}
+                position={Cartesian3.fromDegrees(e.lat, e.long, 200)}
               >
                 {/* <PointGraphics pixelSize={100} color={Color.YELLOW} /> */}
                 {/* <EntityDescription>
@@ -115,7 +115,7 @@ const Resium = () => {
             return (
               <Entity
                 name={`Building ${id}`}
-                position={Cartesian3.fromDegrees(e.lat, e.long, 100)}
+                position={Cartesian3.fromDegrees(e.lat, e.long, 200)}
               >
                 {/* <PointGraphics pixelSize={100} color={Color.YELLOW} /> */}
                 {/* <EntityDescription>
@@ -135,7 +135,7 @@ const Resium = () => {
           boundingSphere={
             new BoundingSphere(
               Cartesian3.fromDegrees(137.96889541, -3.70455916, 200),
-              0
+              200
             )
           }
           offset={new HeadingPitchRange(0, CesiumMath.toRadians(-30), 80000)}
