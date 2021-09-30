@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   Cartesian3,
   ArcGisMapServerImageryProvider,
   Math as CesiumMath,
   BoundingSphere,
   HeadingPitchRange,
-} from "cesium";
+} from 'cesium';
 import {
   Viewer,
   Entity,
@@ -13,12 +13,13 @@ import {
   PointGraphics,
   CameraFlyToBoundingSphere,
   KmlDataSource,
+  CzmlDataSource,
   BillboardGraphics,
-} from "resium";
-import Color from "cesium/Source/Core/Color";
+} from 'resium';
+import Color from 'cesium/Source/Core/Color';
 
-import signalIcon from "./antenna.svg";
-import buildingIcon from "./building.svg";
+import signalIcon from './antenna.svg';
+import buildingIcon from './building.svg';
 
 const Resium = () => {
   const [showPoints, setShowPoints] = useState(false);
@@ -61,19 +62,19 @@ const Resium = () => {
     },
   ];
   return (
-    <div style={{ display: "flex", flexDirection: "row" }}>
+    <div style={{ display: 'flex', flexDirection: 'row' }}>
       <div
         style={{
-          display: "flex",
-          flexDirection: "column",
-          zIndex: "100",
-          backgroundColor: "white",
-          width: "10%",
-          height: "5%",
-          borderRadius: "10px",
-          marginTop: "20px",
-          marginLeft: "20px",
-          padding: "10px",
+          display: 'flex',
+          flexDirection: 'column',
+          zIndex: '100',
+          backgroundColor: 'white',
+          width: '10%',
+          height: '5%',
+          borderRadius: '10px',
+          marginTop: '20px',
+          marginLeft: '20px',
+          padding: '10px',
         }}
       >
         <label for="points">
@@ -134,7 +135,8 @@ const Resium = () => {
         <CameraFlyToBoundingSphere
           boundingSphere={
             new BoundingSphere(
-              Cartesian3.fromDegrees(137.96889541, -3.70455916, 200),
+              // Cartesian3.fromDegrees(137.96889541, -3.70455916, 200),
+              Cartesian3.fromDegrees(129.8267762956, -1.82964037, 200),
               200
             )
           }
@@ -143,8 +145,19 @@ const Resium = () => {
         />
         <KmlDataSource
           data={
-            "https://naufalibnusalam.com/kml/UNet_Generated_MUL053MM1_PUNCAKMULIA.kmz"
+            'https://cesium.naufalibnusalam.com/kml/UNet_Generated_MUL053MM1_PUNCAKMULIA.kmz'
           }
+          onLoad={(dataSource) => {
+            // you can modify data source here
+            dataSource.entities.values.forEach((e) => {
+              e.label = undefined;
+            });
+          }}
+        />
+
+        <KmlDataSource
+          data={'https://cesium.naufalibnusalam.com/kml/MAPS_WAIGAMA_BARAT.kmz'}
+          // data={'../kml/UNet_Generated_MUL053MM1_PUNCAKMULIA.kmz'}
           onLoad={(dataSource) => {
             // you can modify data source here
             dataSource.entities.values.forEach((e) => {

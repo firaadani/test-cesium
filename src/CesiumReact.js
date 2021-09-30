@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 import {
   Cartesian3,
   ArcGisMapServerImageryProvider,
   Math as CesiumMath,
-} from "cesium";
+} from 'cesium';
 import {
   KmlDataSource,
   Viewer,
@@ -11,7 +11,7 @@ import {
   ImageryLayer,
   Camera,
   CameraFlyTo,
-} from "cesium-react";
+} from 'cesium-react';
 
 const CesiumReact = () => {
   return (
@@ -20,8 +20,19 @@ const CesiumReact = () => {
         // data={"./kml/KML_Samples.kml"}
         // data={"./kml/UNet_Generated_MUL053MM1_PUNCAKMULIA.kmz"}
         url={
-          "https://naufalibnusalam.com/kml/UNet_Generated_MUL053MM1_PUNCAKMULIA.kmz"
+          'https://naufalibnusalam.com/kml/UNet_Generated_MUL053MM1_PUNCAKMULIA.kmz'
         }
+        // url={"https://naufalibnusalam.com/kml/slg0070My%20Places.kml"}
+        onError={(err) => console.log(err)}
+        onLoad={(data) => console.log(data)}
+        show
+        clustering
+        name="test"
+      />
+      <KmlDataSource
+        // data={"./kml/KML_Samples.kml"}
+        // data={"./kml/UNet_Generated_MUL053MM1_PUNCAKMULIA.kmz"}
+        url={'https://naufalibnusalam.com/kml/MAPS.kmz'}
         // url={"https://naufalibnusalam.com/kml/slg0070My%20Places.kml"}
         onError={(err) => console.log(err)}
         onLoad={(data) => console.log(data)}
@@ -34,7 +45,7 @@ const CesiumReact = () => {
         description="hahahahahha"
         position={Cartesian3.fromDegrees(137.96889541, -3.70455916, 100)}
         point={{ pixelSize: 10 }}
-        billboard={"https://cdn-icons-png.flaticon.com/512/1437/1437011.png"}
+        billboard={'https://cdn-icons-png.flaticon.com/512/1437/1437011.png'}
       >
         BTS 1
       </Entity>
