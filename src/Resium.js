@@ -24,6 +24,8 @@ import buildingIcon from './building.svg';
 const Resium = () => {
   const [showPoints, setShowPoints] = useState(false);
   const [showBuildings, setShowBuildings] = useState(false);
+  const [showKML1, setshowKML1] = useState(false);
+  const [showKML2, setshowKML2] = useState(false);
   const points = [
     {
       lat: 137.96889541,
@@ -93,78 +95,149 @@ const Resium = () => {
           />
           Buildings
         </label>
+        <label for="kml1">
+          <input
+            id="kml1"
+            type="checkbox"
+            onClick={() => setshowKML1((prev) => !prev)}
+          />
+          KML 1
+        </label>
+        <label for="kml2">
+          <input
+            id="kml2"
+            type="checkbox"
+            onClick={() => setshowKML2((prev) => !prev)}
+          />
+          KML 2
+        </label>
       </div>
       <Viewer full>
         {showPoints &&
           points.map((e, id) => {
             return (
-              <Entity
-                name={`BTS ${id}`}
-                position={Cartesian3.fromDegrees(e.lat, e.long, 200)}
-              >
-                {/* <PointGraphics pixelSize={100} color={Color.YELLOW} /> */}
-                {/* <EntityDescription>
+              <>
+                <CameraFlyToBoundingSphere
+                  boundingSphere={
+                    new BoundingSphere(
+                      Cartesian3.fromDegrees(137.96889541, -3.70455916, 200),
+                      200
+                    )
+                  }
+                  offset={
+                    new HeadingPitchRange(0, CesiumMath.toRadians(-30), 80000)
+                  }
+                  duration={3}
+                />
+                <Entity
+                  name={`BTS ${id}`}
+                  position={Cartesian3.fromDegrees(e.lat, e.long, 200)}
+                >
+                  {/* <PointGraphics pixelSize={100} color={Color.YELLOW} /> */}
+                  {/* <EntityDescription>
             <h1>Hello world</h1>
             <p>test</p>
           </EntityDescription> */}
-                <BillboardGraphics image={signalIcon} height={30} width={30} />
-              </Entity>
+                  <BillboardGraphics
+                    image={signalIcon}
+                    height={30}
+                    width={30}
+                  />
+                </Entity>
+              </>
             );
           })}
         {showBuildings &&
           buildings.map((e, id) => {
             return (
-              <Entity
-                name={`Building ${id}`}
-                position={Cartesian3.fromDegrees(e.lat, e.long, 200)}
-              >
-                {/* <PointGraphics pixelSize={100} color={Color.YELLOW} /> */}
-                {/* <EntityDescription>
+              <>
+                <CameraFlyToBoundingSphere
+                  boundingSphere={
+                    new BoundingSphere(
+                      Cartesian3.fromDegrees(137.96889541, -3.70455916, 200),
+                      200
+                    )
+                  }
+                  offset={
+                    new HeadingPitchRange(0, CesiumMath.toRadians(-30), 80000)
+                  }
+                  duration={3}
+                />
+                <Entity
+                  name={`Building ${id}`}
+                  position={Cartesian3.fromDegrees(e.lat, e.long, 200)}
+                >
+                  {/* <PointGraphics pixelSize={100} color={Color.YELLOW} /> */}
+                  {/* <EntityDescription>
             <h1>Hello world</h1>
             <p>test</p>
           </EntityDescription> */}
-                <BillboardGraphics
-                  image={buildingIcon}
-                  height={30}
-                  width={30}
-                />
-              </Entity>
+                  <BillboardGraphics
+                    image={buildingIcon}
+                    height={30}
+                    width={30}
+                  />
+                </Entity>
+              </>
             );
           })}
-
-        <CameraFlyToBoundingSphere
-          boundingSphere={
-            new BoundingSphere(
-              // Cartesian3.fromDegrees(137.96889541, -3.70455916, 200),
-              Cartesian3.fromDegrees(129.8267762956, -1.82964037, 200),
-              200
-            )
-          }
-          offset={new HeadingPitchRange(0, CesiumMath.toRadians(-30), 80000)}
-          duration={3}
-        />
-        <KmlDataSource
-          data={
-            'https://cesium.naufalibnusalam.com/kml/UNet_Generated_MUL053MM1_PUNCAKMULIA.kmz'
-          }
-          onLoad={(dataSource) => {
-            // you can modify data source here
-            dataSource.entities.values.forEach((e) => {
-              e.label = undefined;
-            });
-          }}
-        />
-
-        <KmlDataSource
-          data={'https://cesium.naufalibnusalam.com/kml/MAPS_WAIGAMA_BARAT.kmz'}
-          // data={'../kml/UNet_Generated_MUL053MM1_PUNCAKMULIA.kmz'}
-          onLoad={(dataSource) => {
-            // you can modify data source here
-            dataSource.entities.values.forEach((e) => {
-              e.label = undefined;
-            });
-          }}
-        />
+        {showKML1 ? (
+          <>
+            <CameraFlyToBoundingSphere
+              boundingSphere={
+                new BoundingSphere(
+                  Cartesian3.fromDegrees(137.96889541, -3.70455916, 200),
+                  200
+                )
+              }
+              offset={
+                new HeadingPitchRange(0, CesiumMath.toRadians(-30), 80000)
+              }
+              duration={3}
+            />
+            <KmlDataSource
+              data={
+                'https://cesium.naufalibnusalam.com/kml/UNet_Generated_MUL053MM1_PUNCAKMULIA.kmz'
+              }
+              onLoad={(dataSource) => {
+                // you can modify data source here
+                dataSource.entities.values.forEach((e) => {
+                  e.label = undefined;
+                });
+              }}
+            />
+          </>
+        ) : (
+          <></>
+        )}
+        {showKML2 && (
+          <>
+            <CameraFlyToBoundingSphere
+              boundingSphere={
+                new BoundingSphere(
+                  Cartesian3.fromDegrees(129.8267762956, -1.82964037, 200),
+                  200
+                )
+              }
+              offset={
+                new HeadingPitchRange(0, CesiumMath.toRadians(-30), 80000)
+              }
+              duration={3}
+            />
+            <KmlDataSource
+              data={
+                'https://cesium.naufalibnusalam.com/kml/MAPS_WAIGAMA_BARAT.kmz'
+              }
+              // data={'../kml/UNet_Generated_MUL053MM1_PUNCAKMULIA.kmz'}
+              onLoad={(dataSource) => {
+                // you can modify data source here
+                dataSource.entities.values.forEach((e) => {
+                  e.label = undefined;
+                });
+              }}
+            />
+          </>
+        )}
       </Viewer>
     </div>
   );
