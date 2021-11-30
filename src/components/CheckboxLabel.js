@@ -1,13 +1,26 @@
-import React from 'react';
+import React from "react";
 
-const CheckboxLabel = ({ id, handleClick, label }) => {
+const CheckboxLabel = ({
+  id,
+  handleClick,
+  label,
+  setter,
+  batch,
+  initialState,
+}) => {
   return (
     <div>
       <label for={id}>
         <input
           id={id}
           type="checkbox"
-          onClick={() => handleClick((prev) => !prev)}
+          onClick={() => {
+            if (batch === "2") {
+              setter({ ...initialState, show: !initialState.show });
+            } else {
+              handleClick((prev) => !prev);
+            }
+          }}
         />
         {label}
       </label>
