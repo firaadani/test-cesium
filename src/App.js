@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import Resium from "./Resium";
+import Resium from './components/Resium';
 
 function App() {
   return (
